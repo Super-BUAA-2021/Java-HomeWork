@@ -1,6 +1,6 @@
 {
-  "name": "OOP Labs",
-  "short_name": "OOP Labs",
+  "name": "面向对象的程序设计",
+  "short_name": "面向对象的程序设计",
   "start_url": "/Java-HomeWork/",
   "scope": "/Java-HomeWork/",
   "display": "standalone",
