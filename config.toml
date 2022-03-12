@@ -1,5 +1,5 @@
 baseURL = 'https://Super-BUAA-2021.github.io/Java-HomeWork/'
-title = 'OOP Labs'
+title = '面向对象的程序设计'
 theme = 'hugo-book'
 
 # Book configuration
