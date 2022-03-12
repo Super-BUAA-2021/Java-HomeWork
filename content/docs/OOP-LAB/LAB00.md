@@ -1,5 +1,6 @@
 ---
 weight: 101
+math: true
 ---
 
 # Lab00: 认识 Java

@@ -1,5 +1,6 @@
 ---
 weight: 102
+math: true
 ---
 
 # Lab01: Java 语法 & 面向对象初步
