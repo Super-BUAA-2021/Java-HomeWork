@@ -1,5 +1,5 @@
 ---
-weight: 11
+weight: 101
 ---
 
 # Lab00: 认识 Java

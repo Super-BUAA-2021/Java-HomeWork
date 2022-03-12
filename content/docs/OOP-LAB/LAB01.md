@@ -1,5 +1,5 @@
 ---
-weight: 12
+weight: 102
 ---
 
 # Lab01: Java 语法 & 面向对象初步
