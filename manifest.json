@@ -1,0 +1,15 @@
+{
+  "name": "OOP Labs",
+  "short_name": "OOP Labs",
+  "start_url": "/Java-HomeWork/",
+  "scope": "/Java-HomeWork/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/Java-HomeWork/favicon.svg",
+      "sizes": "512x512"
+    }
+  ]
+}
