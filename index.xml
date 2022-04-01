@@ -12,7 +12,10 @@ public class Sample { int x; // 1 long y = x; // 2 public void f(int n) { int m;
 如果编程题使用了 package 语句，应当确保提交时目录结构和 package 语句表达的包结构相同。（IDE 很多时候会帮你做）
 编程题在给出了具体需求的情况下，可以根据自己的需要添加额外的方法。
 实验题目 # 初始化 I # 阅读下面这段代码，尝试理解 Java 中初始化的顺序：
-class A { int value; static A a1 = new A(1); public A(int i) { System.out.println(&amp;#34;initialize A&amp;#34;+i); value = i; } public A(A a) { System.</description></item><item><title/><link>https://Super-BUAA-2021.github.io/Java-HomeWork/docs/OOP-LAB/TEMPLATE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Super-BUAA-2021.github.io/Java-HomeWork/docs/OOP-LAB/TEMPLATE/</guid><description>Lab XX Assignment # 班级：
+class A { int value; static A a1 = new A(1); public A(int i) { System.out.println(&amp;#34;initialize A&amp;#34;+i); value = i; } public A(A a) { System.</description></item><item><title/><link>https://Super-BUAA-2021.github.io/Java-HomeWork/docs/OOP-LAB/LAB04/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Super-BUAA-2021.github.io/Java-HomeWork/docs/OOP-LAB/LAB04/</guid><description>Java 程序设计 LAB04 # 实验目的 # 理解继承的必要性 理解继承的基本概念：单继承，多继承 掌握继承的使用 子类属性、构造方法和一般成员方法的书写的编写 变量隐藏 this 和 super 的使用 向上映射 在继承的基础上加深理解权限控制符的使用 保护成员的使用 方法覆盖（初步，重点放在多态一章） 复合与继承的区别及使用 注意事项 # 建议建立一个自己的统一且良好的代码风格，比如命名风格（camelCase、snake_case等）、缩进方式（空格数量、switch-case 缩不缩进等）、开闭大括号换不换行等容易引发战争（迫真）的东西，以养成良好的编程习惯。编程题最好为每一个类编写一个完备的测试类，覆盖尽可能多的输入、函数调用、输出，以证明代码正确实现了功能。如果编程题使用了 package 语句，应当确保提交时目录结构和 package 语句表达的包结构相同。（IDE 很多时候会帮你做）编程题在给出了具体需求的情况下，可以根据自己的需要添加额外的方法。
+大家可以在 vscode、IDEA 等 ide 上找到对应的代码风格检查工具，也可以自己设置自己的代码风格文件，可自行搜索了解 例如： vscode 插件 checkstyle
+实验题目 # Question1. Package # 浏览 Code 文件夹中的 Question01 目录，不允许变更目录结构和文件位置，只允许在文件中添加 package 和 import 语句，使根目录下 build 和 test 文件中的指令可以无报错顺利执行。
+Question2. 权限 # 阅读 Code 文件夹中的 Question02 目录，根据你对访问权限的理解。将文件中所有无法通过编译的语句注释掉。</description></item><item><title/><link>https://Super-BUAA-2021.github.io/Java-HomeWork/docs/OOP-LAB/TEMPLATE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Super-BUAA-2021.github.io/Java-HomeWork/docs/OOP-LAB/TEMPLATE/</guid><description>Lab XX Assignment # 班级：
 学号：
 姓名：
 提交要求（以下内容在最终提交的作业中可以删除，仅作参考） # 目录格式
@@ -24,4 +27,6 @@ class A { int value; static A a1 = new A(1); public A(int i) { System.out.printl
 选项 [参数1] [参数2] [参数3] 其中参数数目为不定项
 当终端输入 QUIT 时，系统退出（程序退出状态为0），并在终端打印一行字符：
 ----- Good Bye! ----- 对于其他的输入，不做任何处理，等待下一行输入 下方是按行读取的一种参考实现 Scanner in = new Scanner(System.in); String argStr; while (true) { argStr = in.nextLine(); } ②用户注册 # 黄金右手国的居民们使用的身份证称为“Aadhaar卡&amp;quot;，铁路系统内的用户注册需要填写姓名、性别、Aadhaar卡号。其中Aadhaar号需要满足以下格式：
-Aadhaar卡号一共12位，全国唯一 前4位为区域代码，范围是[0001,1237] 中间4位为种姓代码，范围为[0020,0460] 最后四位为生物识别库提供的生物识别码，前三位的范围为[000,100]，最后一位表示持有人的性别，0代表女性，1代表男性，2代表其他。 合法的Aadhaar卡号示例：</description></item></channel></rss>
+Aadhaar卡号一共12位，全国唯一 前4位为区域代码，范围是[0001,1237] 中间4位为种姓代码，范围为[0020,0460] 最后四位为生物识别库提供的生物识别码，前三位的范围为[000,100]，最后一位表示持有人的性别，0代表女性，1代表男性，2代表其他。 合法的Aadhaar卡号示例：</description></item><item><title/><link>https://Super-BUAA-2021.github.io/Java-HomeWork/docs/CTS/CTS-2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Super-BUAA-2021.github.io/Java-HomeWork/docs/CTS/CTS-2/</guid><description>CTS-1 # 咖喱铁路售票系统curry ticketing system -2
+题目背景 # ​ 在世界上某个能歌善舞的国家，铁路系统实行配额制，即为弱势群体提供不同的票价优惠，人们通过实名制进行铁路火车票预订，可以查询线路图和购票情况。铁路管理员则负责管理铁路线路，火车营运。同时，还存在团购性质的代理人，能够一次性购买更多的车票。为了让大家能够有序购票乘车，现开发一款铁路售票管理系统，实现上述场景功能。
+功能描述 # 本次的功能以视频形式呈现： 视频地址</description></item></channel></rss>
