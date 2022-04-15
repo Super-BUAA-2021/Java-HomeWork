@@ -125,7 +125,7 @@ public class Test {
 在 Shape 的基础上，定义一个满足如下需求的 `ShapeSequence` 类：
 
 - 具有属性 `private Shape[] shapes`
-- 构造方法 `ShapeList(int size)`
+- 构造方法 `ShapeSequence(int size)`
   - size 用于指定 shapes 的最大长度，如果 size 是负数，那么按照 0 来处理。
   - 构造方法中应当对 shapes 进行初始化赋值，在其他过程中 shapes 的大小不
     应该被改变
