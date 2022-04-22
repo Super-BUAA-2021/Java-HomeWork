@@ -107,7 +107,7 @@ public class MyStack<T> {
     public T pull(){
         //Your code here
     }
-    public T peek(){
+    public T peak(){
         //Your code here
     }
     public static void main(String[] args){
