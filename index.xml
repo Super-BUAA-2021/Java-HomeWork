@@ -51,4 +51,6 @@ CTS-3会测试前面已实现的功能，但不会加强，所以只要CTS-2能�
 对于一行命令输入，只报优先级最高的一个错误，报错优先级为：
 命令名称 &amp;gt; 参数数量 &amp;gt; 参数合法性（从左至右） 其它情况请以功能描述要求的报错顺序为准
 概览 # ​ 本次CTS-3你需要实现的全部新功能（命令）如下表所示，详细要求请见下文。
-命令 参数1 参数2 参数3 参数4 参数5 功能描述 login Aadhaar卡号 姓名 用户登录，是购票的前序操作 logout 退出当前登录的用户账户 buyTicket 列车车次 出发站 目的站 席位代号 张数 用户购买车票 listOrder 查询已购买的车票 login # ​</description></item></channel></rss>
+命令 参数1 参数2 参数3 参数4 参数5 功能描述 login Aadhaar卡号 姓名 用户登录，是购票的前序操作 logout 退出当前登录的用户账户 buyTicket 列车车次 出发站 目的站 席位代号 张数 用户购买车票 listOrder 查询已购买的车票 login # ​</description></item><item><title/><link>https://Super-BUAA-2021.github.io/Java-HomeWork/docs/CTS/CTS-4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://Super-BUAA-2021.github.io/Java-HomeWork/docs/CTS/CTS-4/</guid><description>CTS-4 # 概览 # 考察内容：继承、方法重写、文件I/O等
+本次CTS-4你需要实现的全部新功能（命令）如下表所示，详细要求请见下文。
+命令 参数1 参数2 参数3 参数4 参数5 功能描述 **【修改】**addUser 姓名 性别 卡号 学生优惠额度 无 添加用户**【添加学生购票标志】** **【修改】**buyTicket 列车车次 出发站 目的站 席位代号 张数 用户购买车票**【添加核酸检测判断】** **【新增】**rechargeBalance 充值金额 无 无 无 无 充值钱包余额 **【新增】**checkBalance 无 无 无 无 无 查询余额 **【新增】**importCert CSV文件名 无 无 无 无 导入核酸检测报告 **【新增】**cancellOrder 列车车次 出发站 目的站 席位代号 张数 取消订单 **【新增】**payOrder 无 无 无 无 无 支付全部未付款订单 **【修改】**listOrder 无 无 无 无 无 查询已购买的车票listOrder 以下功能在原来基础上修改 # 学生票功能 # 每位学生有多次以0.</description></item></channel></rss>
