@@ -15,7 +15,7 @@
 | 【新增】rechargeBalance | 充值金额  | 无     | 无     | 无           | 无    | 充值钱包余额                     |
 | 【新增】checkBalance    | 无        | 无     | 无     | 无           | 无    | 查询余额                         |
 | 【新增】importCert      | CSV文件名 | 无     | 无     | 无           | 无    | 导入核酸检测报告                 |
-| 【新增】cancellOrder    | 列车车次  | 出发站 | 目的站 | 席位代号     | 张数  | 取消订单                         |
+| 【新增】cancelOrder     | 列车车次  | 出发站 | 目的站 | 席位代号     | 张数  | 取消订单                         |
 | 【新增】payOrder        | 无        | 无     | 无     | 无           | 无    | 支付全部未付款订单               |
 | 【修改】listOrder       | 无        | 无     | 无     | 无           | 无    | 查询已购买的车票listOrder        |
 
@@ -47,7 +47,8 @@
 
   - 修改方法：listOrder
 
-    - 备注：listOrder命令查看的价格是全票价格（与CTS-3相同），始终不显示折扣后的价格
+    - listOrder命令查看的价格是全票价格（与CTS-3相同），始终不显示折扣后的价格
+    - 学生票优惠仅在payOrder结算时进行扣减，在buyTicket之后payOrder之前不进行扣减
     - 输出格式
 
     【新增】`paid:[结算状态(T/F)]`(支付功能详细描述见下方)，T(rue)表示已经结算，F(alse)表示未结算。
@@ -177,16 +178,15 @@
 
   用户购买车票后可进行退票，实现以下命令：
 
-  | 命令         | 参数1    | 参数2  | 参数3  | 参数4    | 参数5 | 功能描述 |
-  | ------------ | -------- | ------ | ------ | -------- | ----- | -------- |
-  | cancellOrder | 列车车次 | 出发站 | 目的站 | 席位代号 | 张数  | 用户退票 |
+  | 命令        | 参数1    | 参数2  | 参数3  | 参数4    | 参数5 | 功能描述 |
+  | ----------- | -------- | ------ | ------ | -------- | ----- | -------- |
+  | cancelOrder | 列车车次 | 出发站 | 目的站 | 席位代号 | 张数  | 用户退票 |
 
   - 说明
 
     - 退票规则
 
       - 相同出发站、目的站、席位的车票，优先从最近一次的订单中退票，最后一个订单张数不足再去寻找其他符合条件的订单进行退票。
-      - 若为学生用户，且同一订单中同时有学生票和非学生票，优先退非学生票，再退学生票
       - 退票数小于订单张数，仅修改该订单张数，订票的顺序不发生变化；当一笔订单中的车票数量为0时，应当删除这个订单
       - 已确认支付的订单不予退票
       - 退票后应当立即释放席位（不考虑线程安全问题）。
@@ -207,14 +207,14 @@
       [G1001: Shahe->Gaolimen] seat:SB num:20 price:12528.00 paid:F
       [G1001: Shahe->Hamazhen] seat:SB num:20 price:1872.00 paid:F
       [G1001: Shahe->Gaolimen] seat:SB num:50 price:31320.00 paid:F
-      [+]cancellOrder G1001 Shahe Gaolimen SB 11
-      Cancell success
+      [+]cancelOrder G1001 Shahe Gaolimen SB 11
+      Cancel success
       [+]listOrder
       [G1001: Shahe->Gaolimen] seat:SB num:9 price:5637.60 paid:F
       [G1001: Shahe->Hamazhen] seat:SB num:20 price:1872.00 paid:F
       [G1001: Shahe->Gaolimen] seat:SB num:50 price:31320.00 paid:F
-      [+]cancellOrder G1001 Shahe Gaolimen SB 4
-      Cancell success
+      [+]cancelOrder G1001 Shahe Gaolimen SB 4
+      Cancel success
       [+]listOrder
       [G1001: Shahe->Hamazhen] seat:SB num:20 price:1872.00 paid:F
       [G1001: Shahe->Gaolimen] seat:SB num:19 price:11901.60 paid:F
@@ -225,7 +225,7 @@
       [+]listOrder
       [G1001: Shahe->Gaolimen] seat:SB num:20 price:12528.00 paid:F
       [G1001: Shahe->Gaolimen] seat:SB num:50 price:31320.00 paid:T
-      [+]cancellOrder G1001 Shahe Gaolimen SB 21
+      [+]cancelOrder G1001 Shahe Gaolimen SB 21
       No enough orders
       [+]listOrder
       [G1001: Shahe->Gaolimen] seat:SB num:20 price:12528.00 paid:F
@@ -237,7 +237,7 @@
     若退票成功，输出
 
     ```
-    Cancell success
+    Cancel success
     ```
 
   - 异常处理
@@ -249,9 +249,9 @@
 
 - #### 结算功能
 
-  - 新增结算命令，从电子钱包中扣除余额。一旦扣除后，无法再进行取消订单操作。
+  - 新增结算**全部**订单命令，从电子钱包中扣除余额并修改订单结算状态。一旦扣除后，无法再进行取消订单操作。
 
-  - 学生票资格用于抵扣最近一笔订单中的票价，直到资格耗尽为止。
+  - 学生票优惠从最近一笔订单开始抵扣，直到资格耗尽为止，转为正常价格计算。
 
   - 订单是结算的最小单位，即只能按照整笔订单进行结算，订单的结算状态只有T和F。
 
