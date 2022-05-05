@@ -285,7 +285,7 @@ https://bhpan.buaa.edu.cn:443/link/AED2B7D2568D3AAE55D84895D487EA95 有效期限
 CTS\example
 │  cert.csv
 │  cert2.csv
-|  cert3.csv
+│  cert3.csv
 │  patpat-windows-amd64.exe
 │
 ├─4-学号-姓名
