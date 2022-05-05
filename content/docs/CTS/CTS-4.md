@@ -6,16 +6,18 @@
 
  本次CTS-4你需要实现的全部新功能（命令）如下表所示，详细要求请见下文。
 
-| 命令                        | 参数1     | 参数2  | 参数3  | 参数4        | 参数5 | 功能描述                             |
-| --------------------------- | --------- | ------ | ------ | ------------ | ----- | ------------------------------------ |
-| 【修改】addUser         | 姓名      | 性别   | 卡号   | 学生优惠额度 | 无    | 添加用户【添加学生购票标志】         |
-| 【修改】buyTicket       | 列车车次  | 出发站 | 目的站 | 席位代号     | 张数  | 用户购买车票【添加核酸检测判断】     |
-| 【新增】rechargeBalance | 充值金额  | 无     | 无     | 无           | 无    | 充值钱包余额                         |
-| 【新增】checkBalance    | 无        | 无     | 无     | 无           | 无    | 查询余额                             |
-| 【新增】importCert      | CSV文件名 | 无     | 无     | 无           | 无    | 导入核酸检测报告                     |
-| 【新增】cancellOrder    | 列车车次  | 出发站 | 目的站 | 席位代号     | 张数  | 取消订单                             |
-| 【新增】payOrder        | 无        | 无     | 无     | 无           | 无    | 支付全部未付款订单                   |
-| 【修改】listOrder       | 无        | 无     | 无     | 无           | 无    | 查询已购买的车票listOrder            |
+> 虽然功能看起来不少，但是大部分是在原有基础上修改，新增功能逻辑比较简单。加油，CTS就要结束咧！
+
+| 命令                    | 参数1     | 参数2  | 参数3  | 参数4        | 参数5 | 功能描述                         |
+| ----------------------- | --------- | ------ | ------ | ------------ | ----- | -------------------------------- |
+| 【修改】addUser         | 姓名      | 性别   | 卡号   | 学生优惠额度 | 无    | 添加用户【添加学生购票标志】     |
+| 【修改】buyTicket       | 列车车次  | 出发站 | 目的站 | 席位代号     | 张数  | 用户购买车票【添加核酸检测判断】 |
+| 【新增】rechargeBalance | 充值金额  | 无     | 无     | 无           | 无    | 充值钱包余额                     |
+| 【新增】checkBalance    | 无        | 无     | 无     | 无           | 无    | 查询余额                         |
+| 【新增】importCert      | CSV文件名 | 无     | 无     | 无           | 无    | 导入核酸检测报告                 |
+| 【新增】cancellOrder    | 列车车次  | 出发站 | 目的站 | 席位代号     | 张数  | 取消订单                         |
+| 【新增】payOrder        | 无        | 无     | 无     | 无           | 无    | 支付全部未付款订单               |
+| 【修改】listOrder       | 无        | 无     | 无     | 无           | 无    | 查询已购买的车票listOrder        |
 
 ### 以下功能在原来基础上修改
 
@@ -48,10 +50,10 @@
     - 备注：listOrder命令查看的价格是全票价格（与CTS-3相同），始终不显示折扣后的价格
     - 输出格式
 
-    【新增】`paid:[支付状态(T/F)]`(支付功能详细描述见下方)
+    【新增】`paid:[结算状态(T/F)]`(支付功能详细描述见下方)，T(rue)表示已经结算，F(alse)表示未结算。
 
     ```
-    [[列车车次]: [出发站]->[目的站]] seat:[席别代号] num:[张数] price:[总价(保留两位小数)] paid:[支付状态(T/F)]
+    [[列车车次]: [出发站]->[目的站]] seat:[席别代号] num:[张数] price:[总价(保留两位小数)] paid:[结算状态(T/F)]
     ```
 
 - #### 购票功能
@@ -80,64 +82,62 @@
 
 ### 添加以下新功能
 
-- #### 电子钱包功能 
+- #### 电子钱包功能
 
-  - 在现有功能基础上添加电子钱包功能，请根据项目实际自行选择合适的实现方式
+  - 在现有功能基础上添加电子钱包功能，请根据实际自行选择合适的实现方式
 
-  - 精度不做特殊要求，按照先取小数点后两位后进行余额加减即可。
+  - 精度不做特殊要求，先取小数点后两位，再进行加减即可
 
-  - 新增的属性和方法
+  - 新增属性：钱包余额
 
-    - 属性：钱包余额
+  - 新增命令
 
-    - 命令：
+    - 充值余额
 
-      - 充值余额
-
-      | 命令            | 参数1    | 功能描述 |
-      | --------------- | -------- | -------- |
-      | rechargeBalance | 充值金额 | 充值余额 |
-
-      - 输出
-        - 充值成功输出`Recharge Success`
-      - 异常处理
-        - 命令不存在，输出`Command does not exist`
-        - 参数数量不正确，输出`Arguments illegal`
-        - 当前无用户登录，输出`Please login first`
-        - 充值金额保证为数字类型，若为负数，输出`Arguments illegal`
-
-    - 命令：
+    | 命令            | 参数1    | 功能描述 |
+    | --------------- | -------- | -------- |
+    | rechargeBalance | 充值金额 | 充值余额 |
+  
+    - 输出
+      - 充值成功输出`Recharge Success`
     
-      - 查询余额
+    - 异常处理
+      - 命令不存在，输出`Command does not exist`
+      - 参数数量不正确，输出`Arguments illegal`
+      - 当前无用户登录，输出`Please login first`
+      - 充值金额保证为数字类型，若为负数，输出`Arguments illegal`
     
-      | 命令         | 功能描述 |
-      | ------------ | -------- |
-      | checkBalance | 查询余额 |
+    - 查询余额
     
-      - 输出格式
+    | 命令         | 功能描述 |
+    | ------------ | -------- |
+    | checkBalance | 查询余额 |
     
-        保留小数点后两位
+    - 输出
+    
+      - 保留小数点后两位
     
         ```
+        [+]checkBalance
         UserName:SB_DYY
         Balance:19198.10
         ```
     
-      - 异常处理
+    - 异常处理
     
-        - 命令不存在，输出`Command does not exist`
-        - 参数数量不正确，输出`Arguments illegal`
-        - 当前无用户登录，输出`Please login first`
-    
-    - 此外，你还应该设计相关的方法，来实现在购票时从电子钱包余额中进行扣除以及在退款时增加余额。
-
+      - 命令不存在，输出`Command does not exist`
+      - 参数数量不正确，输出`Arguments illegal`
+      - 当前无用户登录，输出`Please login first`
+  
 - #### 核酸检测功能
 
-  - 核酸检测证明从系统外部导入，因此你只需要实现导入证明的功能即可。
+  - 购买车票坐席为[1A, 2A]时需要保证系统中最新的核酸检测证明为阴性，若证明为阳性或不存在则无法购票
 
-  - 购买车票坐席为[1A, 2A]时需要保证系统中有有效的阴性的核酸检测证明
+  - 实现导入证明的功能，核酸检测证明从系统外部导入，保证Aadhaar及检测结果格式正确
 
-  - 若多次导入结果，进行更新操作。总阳性人数和总阴性人数中的“总”取“当前系统中的全部数据”之意
+  - 若多次导入结果，进行更新操作。总阳性人数和总阴性人数中的【总人数】表示【当前有证明的全部人员数量】
+
+  - 多次导入的不同文件中，若有相同的Aadhaar卡号，则为此人保留最后一次导入的文件中的核酸检测结果
 
   - 创建核酸证明类`Cert`,添加如下属性和方法
 
@@ -145,30 +145,29 @@
 
     - 方法：从CSV数据表批量导入证明（超级管理员模式）
 
-      导入n名乘客的命令格式如下：
-    
+      导入乘客核酸检测证明的命令格式如下：
+
       | 命令       | 参数1                     | 功能描述         |
       | ---------- | ------------------------- | ---------------- |
       | importCert | CSV文件名（带.csv扩展名） | 机构导入检测结果 |
-    
-      CSV文件格式如下（表格无标题），第一列为Aadhaar卡号（保证格式正确），第二列为最新的检测结果（P为阳，N为阴）
-    
+
+      CSV文件格式如下（表格无标题），第一列为Aadhaar卡号（保证格式正确），第二列为最新的检测结果（P为阳，N为阴），文件下载地址和文件读取demo详见**其他**部分
+
       | 002301220991 | P    |
       | ------------ | ---- |
       | 100000720000 | N    |
-    
+
     - 输出格式：
-    
+
       - 导入成功输出`Import Success, Positive:[总阳性人数] Negative:[总阴性人数]`
-    
+
     - 异常处理：
-    
+
       - 命令不存在，输出`Command does not exist`
-      - 参数数量（命令行中）不正确，输出`Arguments illegal`
-      - 保证CSV格式及结果标识的数据格式正确，不需做额外的格式校验（即不会出现P/N之外的符号）。
-    
+      - （命令中）参数数量不正确，输出`Arguments illegal`
+
     - 例：
-    
+
       ```
       [+] importCert cert.csv
       [-] Import Success, Positive:1 Negative:1
@@ -181,42 +180,87 @@
   | 命令         | 参数1    | 参数2  | 参数3  | 参数4    | 参数5 | 功能描述 |
   | ------------ | -------- | ------ | ------ | -------- | ----- | -------- |
   | cancellOrder | 列车车次 | 出发站 | 目的站 | 席位代号 | 张数  | 用户退票 |
-  
-  - 退票规则说明
 
-    - 若为学生用户，且同时购买了学生票和非学生票，优先退非学生票，退完之后再退学生票
-    - 保证命令中列车车次、出发站、目的站、席位代号、张数均合法
-    - 若只取消某次订单中的一部分，该订单仅作张数的修改，顺序不发生变化。
-    - 退过的票可以立即拿出去接着出售（程序非并发执行，不考虑线程安全问题）。
-    - 已确认支付的订单不予退款。
-  
+  - 说明
+
+    - 退票规则
+
+      - 相同出发站、目的站、席位的车票，优先从最近一次的订单中退票，最后一个订单张数不足再去寻找其他符合条件的订单进行退票。
+      - 若为学生用户，且同一订单中同时有学生票和非学生票，优先退非学生票，再退学生票
+      - 退票数小于订单张数，仅修改该订单张数，订票的顺序不发生变化；当一笔订单中的车票数量为0时，应当删除这个订单
+      - 已确认支付的订单不予退票
+      - 退票后应当立即释放席位（不考虑线程安全问题）。
+
+    - 保证命令中列车车次、出发站、目的站、席位代号、张数均合法，不需额外判断
+
+    - 如：
+
+      ```
+      // 退票顺序
+      [+]buyTicket G1001 Shahe Gaolimen SB 50
+      Thanks for your order
+      [+]buyTicket G1001 Shahe Hamazhen SB 20
+      Thanks for your order
+      [+]buyTicket G1001 Shahe Gaolimen SB 20
+      Thanks for your order
+      [+]listOrder
+      [G1001: Shahe->Gaolimen] seat:SB num:20 price:12528.00 paid:F
+      [G1001: Shahe->Hamazhen] seat:SB num:20 price:1872.00 paid:F
+      [G1001: Shahe->Gaolimen] seat:SB num:50 price:31320.00 paid:F
+      [+]cancellOrder G1001 Shahe Gaolimen SB 11
+      Cancell success
+      [+]listOrder
+      [G1001: Shahe->Gaolimen] seat:SB num:9 price:5637.60 paid:F
+      [G1001: Shahe->Hamazhen] seat:SB num:20 price:1872.00 paid:F
+      [G1001: Shahe->Gaolimen] seat:SB num:50 price:31320.00 paid:F
+      [+]cancellOrder G1001 Shahe Gaolimen SB 4
+      Cancell success
+      [+]listOrder
+      [G1001: Shahe->Hamazhen] seat:SB num:20 price:1872.00 paid:F
+      [G1001: Shahe->Gaolimen] seat:SB num:19 price:11901.60 paid:F
+      ```
+
+      ```
+      // 已支付订单不予退票
+      [+]listOrder
+      [G1001: Shahe->Gaolimen] seat:SB num:20 price:12528.00 paid:F
+      [G1001: Shahe->Gaolimen] seat:SB num:50 price:31320.00 paid:T
+      [+]cancellOrder G1001 Shahe Gaolimen SB 21
+      No enough orders
+      [+]listOrder
+      [G1001: Shahe->Gaolimen] seat:SB num:20 price:12528.00 paid:F
+      [G1001: Shahe->Gaolimen] seat:SB num:50 price:31320.00 paid:T
+      ```
+
   - 输出格式
-  
+
     若退票成功，输出
-  
+
     ```
     Cancell success
     ```
-  
+
   - 异常处理
     - 命令不存在，输出`Command does not exist`
     - 参数数量不正确，输出`Arguments illegal`
     - 当前无用户登录，输出`Please login first`
     - 未找到匹配的购票信息，输出`No such Record`
     - 退票张数大于已购张数，输出`No enough orders`
-  
+
 - #### 结算功能
 
   - 新增结算命令，从电子钱包中扣除余额。一旦扣除后，无法再进行取消订单操作。
 
-  - 学生票资格用于抵扣最近购买的车票，直到资格耗尽为止。
+  - 学生票资格用于抵扣最近一笔订单中的票价，直到资格耗尽为止。
+
+  - 订单是结算的最小单位，即只能按照整笔订单进行结算，订单的结算状态只有T和F。
 
   - 命令格式如下：
-  
+
     | 命令     | 功能描述 |
     | -------- | -------- |
     | payOrder | 结算订单 |
-  
+
   - 输出格式
     - 若结算成功，则输出`Payment success`
     
@@ -227,6 +271,8 @@
     - 当前无订单，输出`No order`
     - 电子钱包余额不足以结算全部订单，输出`Balance does not enough`
 
+  - 说明：在订单的添加、取消和支付部分，我们采用了【栈】的设计思想。可以依此来设计相关的数据结构（仅作参考，不考察具体实现方式）
+
 ## 其他
 
 cert.csv文件下载地址:
@@ -236,9 +282,10 @@ https://bhpan.buaa.edu.cn:443/link/AED2B7D2568D3AAE55D84895D487EA95 有效期限
 评测时，请将CSV文件放到patpat可执行文件相同路径下。例如：
 
 ```
-D:\Projects\CTS\example
+CTS\example
 │  cert.csv
 │  cert2.csv
+|  cert3.csv
 │  patpat-windows-amd64.exe
 │
 ├─4-学号-姓名
@@ -253,7 +300,7 @@ D:\Projects\CTS\example
 
 提交代码时，请保持以上目录结构。
 
-**不要使用excel等软件打开CSV文件**，可能会导致格式混乱。
+**不要使用excel等软件修改CSV文件**，可能会导致格式混乱。
 
 请保持良好的代码风格以及合理的类封装，下一次实验中可能会添加序列化相关内容。
 
@@ -262,16 +309,15 @@ D:\Projects\CTS\example
 > 举个栗子(使用BufferedReader)
 >
 > ```
->     public static HashMap<String, Boolean> read(String fileName) throws IOException {
->         HashMap<String, Boolean> cert = new HashMap<>();
->         BufferedReader br = new BufferedReader(new FileReader(fileName));
->         String line;
->         while ((line = br.readLine()) != null) {
->             String[] lines = line.split(",");
->             cert.put(lines[0], lines[1].equals("P"));
->         }
->         br.close();
->         return cert;
->     }
+>  public static HashMap<String, Boolean> read(String fileName) throws IOException {
+>      HashMap<String, Boolean> cert = new HashMap<>();
+>      BufferedReader br = new BufferedReader(new FileReader(fileName));
+>      String line;
+>      while ((line = br.readLine()) != null) {
+>          String[] lines = line.split(",");
+>          cert.put(lines[0], lines[1].equals("P"));
+>      }
+>      br.close();
+>      return cert;
+>  }
 > ```
-
