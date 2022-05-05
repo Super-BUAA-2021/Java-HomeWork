@@ -23,9 +23,14 @@
 
 - #### 学生票功能
 
-  每位学生有多次以0.5折购买学生票的机会，并在下单时自动抵扣。请实现以下功能、命令
+  每位学生有多次以0.5折购买学生票的机会，并在下单时自动抵扣。
+
+  **学生优惠仅在结算时生效，订票、查询订单、取消订单时不涉及学生优惠！**
+
+  请实现以下功能、命令
 
   - 创建学生类，继承自用户类，并做出如下修改：
+
     - 添加属性：剩余的优惠次数
 
   - 查询用户身份为学生时，重写学生类的toString方法，按照以下格式输出
@@ -98,38 +103,38 @@
     | 命令            | 参数1    | 功能描述 |
     | --------------- | -------- | -------- |
     | rechargeBalance | 充值金额 | 充值余额 |
-  
+
     - 输出
       - 充值成功输出`Recharge Success`
-    
+
     - 异常处理
       - 命令不存在，输出`Command does not exist`
       - 参数数量不正确，输出`Arguments illegal`
       - 当前无用户登录，输出`Please login first`
       - 充值金额保证为数字类型，若为负数，输出`Arguments illegal`
-    
+
     - 查询余额
-    
+
     | 命令         | 功能描述 |
     | ------------ | -------- |
     | checkBalance | 查询余额 |
-    
+
     - 输出
-    
+
       - 保留小数点后两位
-    
+
         ```
         [+]checkBalance
         UserName:SB_DYY
         Balance:19198.10
         ```
-    
+
     - 异常处理
-    
+
       - 命令不存在，输出`Command does not exist`
       - 参数数量不正确，输出`Arguments illegal`
       - 当前无用户登录，输出`Please login first`
-  
+
 - #### 核酸检测功能
 
   - 购买车票坐席为[1A, 2A]时需要保证系统中最新的核酸检测证明为阴性，若证明为阳性或不存在则无法购票
@@ -241,6 +246,7 @@
     ```
 
   - 异常处理
+
     - 命令不存在，输出`Command does not exist`
     - 参数数量不正确，输出`Arguments illegal`
     - 当前无用户登录，输出`Please login first`
@@ -251,7 +257,9 @@
 
   - 新增结算**全部**订单命令，从电子钱包中扣除余额并修改订单结算状态。一旦扣除后，无法再进行取消订单操作。
 
-  - 学生票优惠从最近一笔订单开始抵扣，直到资格耗尽为止，转为正常价格计算。
+  - 学生票优惠从最近一笔订单开始抵扣，直到资格耗尽为止，耗尽后其余车票按正常价格计算。购票成功后扣除相应的优惠次数
+
+    > 例如：正常票价500，分两次购买，每次购买3张，共有4张优惠资格，则总应付价格为（500\*4）\*0.05+500\*2=1100
 
   - 订单是结算的最小单位，即只能按照整笔订单进行结算，订单的结算状态只有T和F。
 
@@ -262,9 +270,11 @@
     | payOrder | 结算订单 |
 
   - 输出格式
+
     - 若结算成功，则输出`Payment success`
-    
+
   - 异常处理
+
     - 命令不存在，输出`Command does not exist`
     - 参数数量不正确，输出`Arguments illegal`
     - 当前无用户登录，输出`Please login first`
@@ -309,15 +319,15 @@ CTS\example
 > 举个栗子(使用BufferedReader)
 >
 > ```
->  public static HashMap<String, Boolean> read(String fileName) throws IOException {
->      HashMap<String, Boolean> cert = new HashMap<>();
->      BufferedReader br = new BufferedReader(new FileReader(fileName));
->      String line;
->      while ((line = br.readLine()) != null) {
->          String[] lines = line.split(",");
->          cert.put(lines[0], lines[1].equals("P"));
->      }
->      br.close();
->      return cert;
->  }
+> public static HashMap<String, Boolean> read(String fileName) throws IOException {
+>   HashMap<String, Boolean> cert = new HashMap<>();
+>   BufferedReader br = new BufferedReader(new FileReader(fileName));
+>   String line;
+>   while ((line = br.readLine()) != null) {
+>       String[] lines = line.split(",");
+>       cert.put(lines[0], lines[1].equals("P"));
+>   }
+>   br.close();
+>   return cert;
+> }
 > ```
