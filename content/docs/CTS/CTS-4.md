@@ -82,7 +82,7 @@
     - 列车车次不存在，输出`Train does not exist`
     - 出发站或目的站不存在（地球上不存在或该车次不经过该车站），输出`Station does not exist`
     - 席位代号与车次类型不符（席位代号非法或该车次没有这种席位），输出`Seat does not match`
-    - 【新增】若当前用户核酸检测证明结果为阳性或不存在，则输出`Cert illegal`
+    - 【新增】若当前用户购买车票坐席为[1A, 2A],且核酸检测证明结果为阳性或不存在，则输出`Cert illegal`
     - 张数不为正整数，输出`Ticket number illegal`
     - 张数大于该车次该席位的剩余票数，输出`Ticket does not enough`
 
