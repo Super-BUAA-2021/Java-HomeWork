@@ -116,7 +116,7 @@ public static void copyFile (String sourceFile, String targetFile) throws IOExce
 ### Question6 复制一个文件夹下面所有文件和子文件夹内容到另一文件夹 `编程`
 
 ```java
-public static void copyDirectiory(String sourceDir, String targetDir) throws IOException;
+public static void copyDirectory(String sourceDir, String targetDir) throws IOException;
 ```
 
 可以尝试复用 Q5 的代码
