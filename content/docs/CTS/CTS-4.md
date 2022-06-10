@@ -289,6 +289,10 @@ cert.csv文件下载地址:
 
 https://bhpan.buaa.edu.cn:443/link/AED2B7D2568D3AAE55D84895D487EA95 有效期限：2022-06-02 23:59
 
+原来的链接挂了，这里补上一个新的：
+
+https://bhpan.buaa.edu.cn:443/link/5B444AB03C7ABAB5BB4F3DE89DB6C467 有效期限：2022-07-09 23:59
+
 评测时，请将CSV文件放到patpat可执行文件相同路径下。例如：
 
 ```
